@@ -1,0 +1,137 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/personal-details.css">
+        <title>Personal Details Form</title>
+    </head>
+    <body>
+    
+    <div class="container">
+
+        <div class="navbar">
+            <h1 id = "logo">HEALTH EASE</h1>
+            <ul>
+                <li><a href="/home" id="home"><i class="fas fa-home"></i><span>Home</span></a></li>
+                <li><a href="/hospital" id="hospital"><i class="fas fa-hospital"></i><span>Hospital</span></a></li>
+                <li><a href="/personal-details" id="personal-details"><i class="fas fa-user"></i><span>Personal Details</span></a></li>
+                <li><a href="/chatbot" id="chatbot"><i class="fas fa-comments"></i><span>Chatbot</span></a></li>
+            </ul>
+        </div>
+        <h2>Personal Details Form</h2>
+        <form id="detailsForm" action="/personal" method="POST">
+            
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" value="<%= user.name %>" required>
+           
+           
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="dob" value="<%= user.dob %>" required>
+           
+            
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" required>
+                    <option value="" disabled>Select your gender</option>
+                    <option value="Male" <%= user.gender === 'Male' ? 'selected' : '' %>>Male</option>
+                    <option value="Female" <%= user.gender === 'Female' ? 'selected' : '' %>>Female</option>
+                    <option value="Other" <%= user.gender === 'Other' ? 'selected' : '' %>>Other</option>
+                </select>
+          
+            
+                <label for="bloodGroup">Blood Group</label>
+                <input type="text" id="bloodGroup" name="bloodGroup" value="<%= user.bloodGroup %>" required>
+            
+           
+                <label for="mobile">Mobile Number</label>
+                <input type="text" id="mobile" name="mobile" value="<%= user.mobile %>" required>
+           
+            
+                <label for="email">Email ID</label>
+                <input type="email" id="email" name="email" value="<%= user.email %>">
+         
+                <label for="aadhar">Aadhar Card Number</label>
+                <input type="text" id="aadhar" name="aadhar" value="<%= user.aadhar %>" required>
+           
+          
+                <label for="aabha">AABHA Card Number <span class="optional">(Optional)</span></label>
+                <input type="text" id="aabha" name="aabha" value="<%= user.aabha %>">
+           
+           
+                <h3>Guardian Details</h3>
+                <label for="guardianName">Guardian Name</label>
+                <input type="text" id="guardianName" name="guardianName" value="<%= user.guardianName %>" required>
+          
+                <label for="guardianMobile">Guardian Mobile Number</label>
+                <input type="text" id="guardianMobile" name="guardianMobile" value="<%= user.guardianMobile %>" required>
+         
+                <label for="guardianEmail">Guardian Email ID <span class="optional">(Optional)</span></label>
+                <input type="email" id="guardianEmail" name="guardianEmail" value="<%= user.guardianEmail %>">
+          
+                <label for="nationality">Nationality</label>
+                <input type="text" id="nationality" name="nationality" value="<%= user.nationality %>" required>
+         
+                <label for="address">Address</label>
+                <textarea id="address" name="address" required><%= user.address %></textarea>
+          
+                <label for="pincode">Pincode</label>
+                <input type="text" id="pincode" name="pincode" value="<%= user.pincode %>" required>
+            
+                <label for="state">State</label>
+                <select id="state" name="state" onchange="updateCities()">
+                    <option value="">Select State</option>
+                    <option value="andhra-pradesh" <%= user.state === 'andhra-pradesh' ? 'selected' : '' %>>Andhra Pradesh</option>
+                    <option value="arunachal-pradesh" <%= user.state === 'arunachal-pradesh' ? 'selected' : '' %>>Arunachal Pradesh</option>
+                    <option value="assam" <%= user.state === 'assam' ? 'selected' : '' %>>Assam</option>
+                    <option value="bihar" <%= user.state === 'bihar' ? 'selected' : '' %>>Bihar</option>
+                    <option value="chhattisgarh" <%= user.state === 'chhattisgarh' ? 'selected' : '' %>>Chhattisgarh</option>
+                    <option value="goa" <%= user.state === 'goa' ? 'selected' : '' %>>Goa</option>
+                    <option value="gujarat" <%= user.state === 'gujarat' ? 'selected' : '' %>>Gujarat</option>
+                    <option value="haryana" <%= user.state === 'haryana' ? 'selected' : '' %>>Haryana</option>
+                    <option value="himachal-pradesh" <%= user.state === 'himachal-pradesh' ? 'selected' : '' %>>Himachal Pradesh</option>
+                    <option value="jharkhand" <%= user.state === 'jharkhand' ? 'selected' : '' %>>Jharkhand</option>
+                    <option value="karnataka" <%= user.state === 'karnataka' ? 'selected' : '' %>>Karnataka</option>
+                    <option value="kerala" <%= user.state === 'kerala' ? 'selected' : '' %>>Kerala</option>
+                    <option value="madhya-pradesh" <%= user.state === 'madhya-pradesh' ? 'selected' : '' %>>Madhya Pradesh</option>
+                    <option value="maharashtra" <%= user.state === 'maharashtra' ? 'selected' : '' %>>Maharashtra</option>
+                    <option value="manipur" <%= user.state === 'manipur' ? 'selected' : '' %>>Manipur</option>
+                    <option value="meghalaya" <%= user.state === 'meghalaya' ? 'selected' : '' %>>Meghalaya</option>
+                    <option value="mizoram" <%= user.state === 'mizoram' ? 'selected' : '' %>>Mizoram</option>
+                    <option value="nagaland" <%= user.state === 'nagaland' ? 'selected' : '' %>>Nagaland</option>
+                    <option value="odisha" <%= user.state === 'odisha' ? 'selected' : '' %>>Odisha</option>
+                    <option value="punjab" <%= user.state === 'punjab' ? 'selected' : '' %>>Punjab</option>
+                    <option value="rajasthan" <%= user.state === 'rajasthan' ? 'selected' : '' %>>Rajasthan</option>
+                    <option value="sikkim" <%= user.state === 'sikkim' ? 'selected' : '' %>>Sikkim</option>
+                    <option value="tamil-nadu" <%= user.state === 'tamil-nadu' ? 'selected' : '' %>>Tamil Nadu</option>
+                    <option value="telangana" <%= user.state === 'telangana' ? 'selected' : '' %>>Telangana</option>
+                    <option value="tripura" <%= user.state === 'tripura' ? 'selected' : '' %>>Tripura</option>
+                    <option value="uttar-pradesh" <%= user.state === 'uttar-pradesh' ? 'selected' : '' %>>Uttar Pradesh</option>
+                    <option value="uttarakhand" <%= user.state === 'uttarakhand' ? 'selected' : '' %>>Uttarakhand</option>
+                    <option value="west-bengal" <%= user.state === 'west-bengal' ? 'selected' : '' %>>West Bengal</option>
+                    <option value="andaman-nicobar" <%= user.state === 'andaman-nicobar' ? 'selected' : '' %>>Andaman and Nicobar Islands</option>
+                    <option value="chandigarh" <%= user.state === 'chandigarh' ? 'selected' : '' %>>Chandigarh</option>
+                    <option value="dadra-nagar-haveli" <%= user.state === 'dadra-nagar-haveli' ? 'selected' : '' %>>Dadra and Nagar Haveli</option>
+                    <option value="daman-diu" <%= user.state === 'daman-diu' ? 'selected' : '' %>>Daman and Diu</option>
+                    <option value="delhi" <%= user.state === 'delhi' ? 'selected' : '' %>>Delhi</option>
+                    <option value="lakshadweep" <%= user.state === 'lakshadweep' ? 'selected' : '' %>>Lakshadweep</option>
+                    <option value="puducherry" <%= user.state === 'puducherry' ? 'selected' : '' %>>Puducherry</option>
+                </select>
+            
+                <label for="city">City</label>
+                <select id="city" name="city" required>
+                  <option value="visakhapatnam" <%= user.city === 'Visakhapatnam' ? 'selected' : '' %>>Visakhapatnam</option>
+                  <option value="vijayawada" <%= user.city === 'Vijayawada' ? 'selected' : '' %>>Vijayawada</option>
+                  <option value="tirupati" <%= user.city === 'Tirupati' ? 'selected' : '' %>>Tirupati</option>
+                  <option value="kakinada" <%= user.city === 'Kakinada' ? 'selected' : '' %>>Kakinada</option>
+                  <option value="rajahmundry" <%= user.city === 'Rajahmundry' ? 'selected' : '' %>>Rajahmundry</option>
+                
+                </select><br>
+            
+                <button type="submit">Submit Details</button>
+        </form>
+    </div>
+    
+    </body>
+    </html>
+    

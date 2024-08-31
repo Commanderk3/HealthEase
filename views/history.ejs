@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles2.css">
+    <title>Health Ease</title>
+</head>
+<body>
+    <div class="sidebar">
+        <h1>HEALTH EASE</h1>
+        <ul>
+            <li><a href="/fumod"><i class="fas fa-home"></i><span>Dashboard</span></a></li>
+            <li><a href="/personalmod"><i class="fas fa-user"></i><span>Personal Details</span></a></li>
+            <li><a href="/patienthistmod"><i class="fas fa-patient history"></i><span>Patient History</span></a></li>
+            <li><a href="#" id="hospital" onclick="loadContent('hospital')"><i class="fas fa-hospital"></i><span>Hospital</span></a></li>
+            <li><a href="#" id="ambulance-booking" onclick="loadContent('ambulance-booking')"><i class="fas fa-ambulance"></i><span>Ambulance Booking</span></a></li>
+            <li><a href="#" id="chatbot" onclick="loadContent('chatbot')"><i class="fas fa-comments"></i><span>Chatbot</span></a></li>
+            <li><a href="#" id="health-tips" onclick="loadContent('health-tips')"><i class="fas fa-heartbeat"></i><span>Health Tips and Queries</span></a></li>
+            <li><a href="#" id="logout" onclick="loadContent('logout')"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
+        </ul>
+        <div class="time-box">
+            <div id="datetime"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="main-content" id="main-content">
+            <!-- Tabs and Content Sections -->
+            <div class="tabs">
+                <button id="prescriptionTab" class="active" onclick="switchTab(event, 'prescriptionContent')">Prescription</button>
+                <button id="testResultsTab" onclick="switchTab(event, 'testResultsContent')">Test Results</button>
+                <button id="appointmentHistoryTab" onclick="switchTab(event, 'appointmentHistoryContent')">Previous Appointment History</button>
+                <button id="healthRecordTab" onclick="switchTab(event, 'healthRecordContent')">Health Record</button>
+            </div>
+            
+            <!-- Prescription Section -->
+            <div id="prescriptionContent" class="content-container active">
+                <h3>Prescription</h3>
+                <p>Here you can view and manage your current prescriptions.</p>
+                <button class="add-new-button" onclick="toggleForm('prescriptionForm')">Add New Prescription</button>
+
+                <div id="prescriptionForm" class="form-container">
+                    <div class="form-group">
+                        <label for="prescriptionName">Prescription Name</label>
+                        <input type="text" id="prescriptionName" placeholder="Enter prescription name">
+                    </div>
+                    <div class="form-group">
+                        <label for="prescriptionDetails">Prescription Details</label>
+                        <textarea id="prescriptionDetails" rows="4" placeholder="Enter prescription details"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button onclick="submitPrescription()">Submit</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Results Section -->
+            <div id="testResultsContent" class="content-container">
+                <h3>Test Results</h3>
+                <p>View the results of your recent medical tests.</p>
+                <button class="add-new-button" onclick="toggleForm('testResultsForm')">Add New Test Result</button>
+
+                <div id="testResultsForm" class="form-container">
+                    <div class="form-group">
+                        <label for="testName">Test Name</label>
+                        <input type="text" id="testName" placeholder="Enter test name">
+                    </div>
+                    <div class="form-group">
+                        <label for="testDate">Test Date</label>
+                        <input type="date" id="testDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="testDetails">Test Details</label>
+                        <textarea id="testDetails" rows="4" placeholder="Enter test details"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button onclick="submitTestResult()">Submit</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Previous Appointment History Section -->
+            <div id="appointmentHistoryContent" class="content-container">
+                <h3>Previous Appointment History</h3>
+                <p>Check the history of your previous appointments with the healthcare provider.</p>
+                <!-- Add appointment history details here -->
+            </div>
+
+            <!-- Health Record Section -->
+            <div id="healthRecordContent" class="content-container">
+                <h3>Health Record</h3>
+                <p>Your complete health record and history are available here.</p>
+                <!-- Add health record details here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateDateTime() {
+            const now = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+            document.getElementById('datetime').textContent = now;
+        }
+
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+
+        function loadContent(page) {
+            const links = document.querySelectorAll('.sidebar ul li a');
+            links.forEach(link => link.classList.remove('active'));
+
+            document.getElementById(page).classList.add('active');
+
+            document.getElementById('main-content').style.display = 'flex';
+
+            switchTab({ target: document.getElementById(page) }, page + 'Content');
+        }
+
+        function switchTab(event, contentId) {
+            const tabs = document.querySelectorAll('.tabs button');
+            const contents = document.querySelectorAll('.content-container');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(contentId).classList.add('active');
+        }
+
+        function toggleForm(formId) {
+            const form = document.getElementById(formId);
+            form.classList.toggle('active');
+        }
+
+        function submitPrescription() {
+            const name = document.getElementById('prescriptionName').value;
+            const details = document.getElementById('prescriptionDetails').value;
+            alert(`New Prescription Submitted:\nName: ${name}\nDetails: ${details}`);
+        }
+
+        function submitTestResult() {
+            const testName = document.getElementById('testName').value;
+            const testDate = document.getElementById('testDate').value;
+            const testDetails = document.getElementById('testDetails').value;
+            alert(`New Test Result Submitted:\nTest Name: ${testName}\nDate: ${testDate}\nDetails: ${testDetails}`);
+        }
+
+    </script>
+</body>
+</html>

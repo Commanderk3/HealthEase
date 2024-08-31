@@ -1,0 +1,89 @@
+/* Reset some basic styles */
+body, h1, h2, p, ul, li {
+    margin: 0;
+    padding: 0;
+    background-image: url(../images/bg.jpg);
+    background-repeat: repeat; 
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    background-size: cover; 
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Navbar at the top */
+.navbar {
+    display: flex;
+    color: #f4f4f4;
+    padding: 15px 20px;
+    height: 10vh;
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.navbar ul li {
+    margin: 25px 15px;
+}
+
+#logo {
+    margin-top: 20px;
+    margin-right: 55%;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.navbar ul li a:hover {
+    color: #ddd;
+}
+
+/* Main content area */
+.main-content {
+    color: #ddd;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centering content vertically */
+    text-align: center; /* Centering content horizontally */
+    flex-grow: 1; /* Allows .main-content to take up remaining space */
+}
+
+.main-content h1 {
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+
+.main-content p {
+    font-size: 18px;
+    color: #666;
+    max-width: 600px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar ul li a {
+        font-size: 16px;
+    }
+
+    .main-content h2 {
+        font-size: 28px;
+    }
+
+    .main-content p {
+        font-size: 16px;
+    }
+}

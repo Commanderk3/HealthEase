@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Ease</title>
+</head>
+<body>
+    <div class="sidebar">
+        <h1>HEALTH EASE</h1>
+        <ul>
+            <li><a href="#" id="dashboard" onclick="loadContent('dashboard')"><i class="fas fa-home"></i><span>Dashboard</span></a></li>
+            <li><a href="personalmod.html"><i class="fas fa-user"></i><span>Personal Details</span></a></li>
+            <li><a href="patienthistmod.html"><i class="fas fa-patient history"></i><span>Patient History</span></a></li>
+            <li><a href="#" id="hospital" onclick="loadContent('hospital')"><i class="fas fa-hospital"></i><span>Hospital</span></a></li>
+            <li><a href="#" id="ambulance-booking" onclick="loadContent('ambulance-booking')"><i class="fas fa-ambulance"></i><span>Ambulance Booking</span></a></li>
+            <li><a href="#" id="chatbot" onclick="loadContent('chatbot')"><i class="fas fa-comments"></i><span>Chatbot</span></a></li>
+            <li><a href="#" id="health-tips" onclick="loadContent('health-tips')"><i class="fas fa-heartbeat"></i><span>Health Tips and Queries</span></a></li>
+            <li><a href="#" id="logout" onclick="loadContent('logout')"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
+        </ul>
+        <div class="time-box">
+            <div id="datetime"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="main-content" id="main-content">
+            <!-- Dashboard Content by default -->
+            <div class="content-wrapper" id="dashboard-content">
+                <div class="details-section">
+                    <h3>Patient Profile</h3>
+                    <table>
+                        <tr>
+                            <th>Patient Name</th>
+                            <td id="patient-name"><%= patientData.name %></td>
+                        </tr>
+                        <tr>
+                            <th>D.O.B</th>
+                            <td id="dob"><%= patientData.dob %></td>
+                        </tr>
+                        <tr>
+                            <th>Gender</th>
+                            <td id="gender"><%= patientData.gender %></td>
+                        </tr>
+                        <tr>
+                            <th>Blood Group</th>
+                            <td id="blood-group"><%= patientData.bloodGroup %></td>
+                        </tr>
+                        <tr>
+                            <th>Mobile No.</th>
+                            <td id="mobile-no"><%= patientData.mobileNo %></td>
+                        </tr>
+                        <tr>
+                            <th>Email ID</th>
+                            <td id="email-id"><%= patientData.emailId %></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="photo-section">
+                    <img src="https://via.placeholder.com/150" alt="No Photo">
+                    <button class="edit-btn">Edit Photo</button>
+                    <span class="active-status">Current Status: Active</span>
+                </div>
+            </div>
+
+            <div id="additional-content">
+                <!-- Additional content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+        function updateDateTime() {
+            const now = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+            document.getElementById('datetime').textContent = now;
+        }
+
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+
+        function loadContent(page) {
+            const links = document.querySelectorAll('.sidebar ul li a');
+            links.forEach(link => link.classList.remove('active'));
+
+            document.getElementById(page).classList.add('active');
+
+            document.getElementById('dashboard-content').style.display = 'none';
+            document.getElementById('additional-content').style.display = 'none';
+
+            if (page === 'dashboard') {
+                document.getElementById('dashboard-content').style.display = 'flex';
+                loadPatientDetails();
+            } else {
+                document.getElementById('additional-content').style.display = 'block';
+            }
+        }
+
+        function loadPatientDetails() {
+            // Example data; replace this with data fetched from a server or login session
+            const patientData = {
+                name: "<%= patientData.name %>",
+                dob: "<%= patientData.dob %>",
+                gender: "<%= patientData.gender %>",
+                bloodGroup: "<%= patientData.bloodGroup %>",
+                mobileNo: "<%= patientData.mobileNo %>",
+                emailId: "<%= patientData.emailId %>"
+            };
+
+            document.getElementById('patient-name').textContent = patientData.name;
+            document.getElementById('dob').textContent = patientData.dob;
+            document.getElementById('gender').textContent = patientData.gender;
+            document.getElementById('blood-group').textContent = patientData.bloodGroup;
+            document.getElementById('mobile-no').textContent = patientData.mobileNo;
+            document.getElementById('email-id').textContent = patientData.emailId;
+        }
+
+        window.onload = function() {
+            loadContent('dashboard');
+        };
+    </script>
+</body>
+</html>
